@@ -1,0 +1,80 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow">
+    <div class="container">
+      <!-- Brand -->
+      <a class="navbar-brand fw-bold" href="/">airbnb</a>
+
+      <!-- Mobile toggle -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#mainNavbar"
+        aria-controls="mainNavbar"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Nav links -->
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a
+              href="/"
+              class="nav-link <%= currentPage === 'index' ? 'active bg-light text-danger rounded px-3' : '' %>"
+            >
+              Home
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              href="/homes"
+              class="nav-link <%= currentPage === 'Home' ? 'active bg-light text-danger rounded px-3' : '' %>"
+            >
+              Homes List
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              href="/favourites"
+              class="nav-link <%= currentPage === 'favourites' ? 'active bg-light text-danger rounded px-3' : '' %>"
+            >
+              Favourites
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              href="/bookings"
+              class="nav-link <%= currentPage === 'bookings' ? 'active bg-light text-danger rounded px-3' : '' %>"
+            >
+              Bookings
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              href="/host/host-home-list"
+              class="nav-link <%= currentPage === 'host-homes' ? 'active bg-light text-danger rounded px-3' : '' %>"
+            >
+              Host Homes
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              href="/host/add-home"
+              class="nav-link <%= currentPage === 'add Home' ? 'active bg-light text-danger rounded px-3' : '' %>"
+            >
+              Add Home
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
