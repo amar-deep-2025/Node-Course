@@ -43,9 +43,11 @@
                 <a href="/host/edit/<%= home.id %>" class="btn btn-outline-primary btn-sm w-50">
                   Edit
                 </a>
-                <a href="/host/delete/<%= home.id %>" class="btn btn-outline-danger btn-sm w-50">
+                <form action="host/delete-home/<%=home.id%>" method="POST">
+                <a href="/host/delete/<%= home.id %>?editing=true" class="btn btn-outline-danger btn-sm w-50">
                   Delete
                 </a>
+              </form>
               </div>
             </div>
           </div>

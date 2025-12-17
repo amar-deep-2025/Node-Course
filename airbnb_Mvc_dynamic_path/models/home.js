@@ -2,11 +2,13 @@ const fs = require("fs");
 const path = require("path");
 
 const rootDir = require("../utils/filePath");
-const Favourite = require("./favourite");
+const Favourite = require("../models/favourite");
+
 const homeDataPath = path.join(rootDir, "data", "homes.json");
 
 module.exports = class Home {
-  constructor(houseName, price, location, rating, photoUrl) {
+  constructor(id, houseName, price, location, rating, photoUrl) {
+    this.id = id;
     this.houseName = houseName;
     this.price = price;
     this.location = location;
@@ -28,7 +30,6 @@ module.exports = class Home {
   static fetchAll(callback) {
     fs.readFile(homeDataPath, (err, data) => {
       if (err || data.length === 0) {
-        // ✅ file missing or empty → safe fallback
         return callback([]);
       }
 
@@ -43,18 +44,20 @@ module.exports = class Home {
 
   static findById(homeId, callback) {
     Home.fetchAll((homes) => {
-      homes = homes.filter((home) => home.id === homeId);
+      const homeFound = homes.find((home) => home.id === homeId);
       callback(homeFound);
     });
   }
 
-  static deleteById(homeId,callback){
-    Home.fetchAll(homes=>{
-      homes=homes.filter(home=>home.id!==homeId);
-      fs.writeFile(homeDataPath,JSON.stringify(homes),error={
-        Favourite.deleteById(homeId,callback);
-      })
-    })
-  }
+  static deleteById(homeId, callback) {
+    Home.fetchAll((homes) => {
+      const updatedHomes = homes.filter((home) => home.id !== homeId);
 
+      fs.writeFile(homeDataPath, JSON.stringify(updatedHomes), (error) => {
+        if (!error) {
+          Favourite.deleteById(homeId, callback);
+        }
+      });
+    });
+  }
 };
