@@ -1,0 +1,78 @@
+<%- include('../partials/head') %>
+</head>
+<body class="bg-light">
+  <%- include('../partials/nav') %>
+
+  <main class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow">
+          <div class="card-body p-4">
+            <h1 class="text-center mb-4 fw-bold text-dark">
+              Register Your Home on AirBnB
+            </h1>
+
+            <form action="/host/add-home" method="POST">
+              <div class="mb-3">
+                <input
+                  type="text"
+                  name="houseName"
+                  class="form-control"
+                  placeholder="Enter your House Name"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <input
+                  type="text"
+                  name="price"
+                  class="form-control"
+                  placeholder="Price Per Night"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <input
+                  type="text"
+                  name="location"
+                  class="form-control"
+                  placeholder="Location"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <input
+                  type="text"
+                  name="rating"
+                  class="form-control"
+                  placeholder="Rating"
+                />
+              </div>
+
+              <div class="mb-3">
+                <input
+                  type="text"
+                  name="photoUrl"
+                  class="form-control"
+                  placeholder="Enter Photo URL"
+                />
+              </div>
+
+              <div class="d-grid">
+                <button type="submit" class="btn btn-danger">
+                  Submit
+                </button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

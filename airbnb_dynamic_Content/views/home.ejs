@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Home</title>
+  </head>
+  <body>
+    <h1>Welcome to Airbnb</h1>
+
+    <h2>Your Registered Homes:</h2>
+    <ul>
+      <% registeredHomes.forEach(home => { %>
+      <li><%= home.houseName %></li>
+      <% }) %>
+    </ul>
+
+    <a href="/host/add-home">Add Home</a>
+  </body>
+</html>
