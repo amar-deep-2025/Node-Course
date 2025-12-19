@@ -1,11 +1,9 @@
-const e = require("express");
 const Home = require("../models/home");
-const { registeredHomes } = require("../routes/hostRouters");
 
 exports.getAddHome = (req, res, next) => {
-  res.render("host/addHomes", {
-    pageTitle: "Add Home to airbnb!",
-    currentPage: "add Home",
+  res.render("host/edit-home", {
+    pageTitle: "Add Home to Airbnb",
+    currentPage: "add-home",
     editing: false,
   });
 };
@@ -13,19 +11,22 @@ exports.getAddHome = (req, res, next) => {
 exports.getEditHome = (req, res, next) => {
   const homeId = req.params.homeId;
   const editing = req.query.editing === "true";
+
   Home.findById(homeId, (home) => {
     if (!home) {
-      console.log("Home not found for editing.");
+      console.log("Home not found");
       return res.redirect("/host/host-home-list");
     }
-    console.log(homeId, editing, home);
-    res.render("/host/edit-home", {
+
+    res.render("host/edit-home", {
       home: home,
-      currentPage: "Edit Your Home",
       editing: editing,
+      currentPage: "host-homes",
+      pageTitle: "Edit Your Home",
     });
   });
 };
+
 exports.getHostHomes = (req, res, next) => {
   Home.fetchAll((registeredHomes) => {
     res.render("host/host-home-list", {
@@ -38,15 +39,14 @@ exports.getHostHomes = (req, res, next) => {
 
 exports.postAddHome = (req, res, next) => {
   const { houseName, price, location, rating, photoUrl } = req.body;
-  const home = new Home(houseName, price, location, rating, photoUrl);
+  const home = new Home(null, houseName, price, location, rating, photoUrl);
   home.save();
-
-  res.redirect("host/home-added");
+  res.redirect("/host/host-home-list");
 };
 
 exports.postEditHome = (req, res, next) => {
   const { id, houseName, price, location, rating, photoUrl } = req.body;
-  const home = new Home(houseName, price, location, rating, photoUrl);
+  const home = new Home(id, houseName, price, location, rating, photoUrl);
   home.id = id;
   home.save();
   res.redirect("/host/host-home-list");
@@ -54,11 +54,11 @@ exports.postEditHome = (req, res, next) => {
 
 exports.postDeleteHome = (req, res, next) => {
   const homeId = req.params.homeId;
-  console.log("came to delete ", homeId);
+  console.log("Came to delete ", homeId);
   Home.deleteById(homeId, (error) => {
     if (error) {
-      console.log("Error while deleting ", error);
+      console.log("Error while deleting", error);
     }
-    res.redirect("host//host-home-list");
+    res.redirect("/host/host-home-list");
   });
 };
